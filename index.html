@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Гифка с надписью</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="image-container">
+        
+        <img src="my-animation.gif" alt="Описание гифки">
+        
+        <div class="center-text-block">
+            <p>If the figure of the deceased bat is preserved only because the truth about it is concealed from it, how is it with the self, on which its preservation depends? He did not know... A little more, and he would have known — God forbid! How could he know? It would be better if I died. That is exactly how I come there — to where it was: who knew that I was dead? Yes, yes, the mysterious traumas of Freud's discoveries now mean no more than birthmarks. The food of psychoanalysis has become observations of children and the childishness of observations.
+
+          </p>
+            
+        </div>
+        
+        <div class="corner-text">
+            Специальная надпись в углу
+        </div>
+        
+        <div class="audio-player">
+            
+            <audio id="myAudio" loop>
+                <source src="my-song.mp3" type="audio/mpeg">
+            </audio>
+
+            <div class="controls-group">
+                <button id="playPauseButton">Play</button>
+                
+                <input type="range" id="progressBar" value="0" min="0" max="100" step="0.01">
+            </div>
+            
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+
+        </div> 
+    </div> 
+    
+    <script>
+        const audio = document.getElementById('myAudio');
+        const playPauseButton = document.getElementById('playPauseButton');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const progressBar = document.getElementById('progressBar'); 
+
+        // --- 1. Инициализация и длительность трека ---
+        audio.addEventListener('loadedmetadata', () => {
+            progressBar.max = audio.duration;
+            audio.volume = volumeSlider.value;
+        });
+
+        // --- 2. Управление кнопкой Play/Pause ---
+        playPauseButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = 'Pause';
+            } else {
+                audio.pause();
+                playPauseButton.textContent = 'Play';
+            }
+        });
+
+        // --- 3. Обновление полоски прогресса во время игры ---
+        audio.addEventListener('timeupdate', () => {
+            progressBar.value = audio.currentTime;
+        });
+
+        // --- 4. Перемотка, когда пользователь двигает ползунок ---
+        progressBar.addEventListener('input', () => {
+            audio.currentTime = progressBar.value;
+        });
+        
+        // --- 5. Управление громкостью ---
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+        });
+
+        // --- 6. Сброс ползунка при завершении трека ---
+        audio.addEventListener('ended', () => {
+            progressBar.value = 0;
+            playPauseButton.textContent = 'Play';
+        });
+    </script>
+</body>
+</html>
