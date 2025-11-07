@@ -63,17 +63,15 @@ html, body {
 /* ==================================================================== */
 
 
-/* 4. Стили для текста в углу */
+/* 4. Стили для текста в углу (ТЕПЕРЬ БЕЗ ФОНА) */
 .corner-text {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: red;
-    padding: 5px 10px;
+    /* Убрали background-color и padding */
+    color: red; /* Оставляем только цвет текста */
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 72px;
-    border-radius: 4px;
     z-index: 10;
 }
 
@@ -131,4 +129,5 @@ html, body {
 /* НОВЫЙ БЛОК: Стили для полоски прогресса */
 #progressBar {
     width: 100px; /* Задайте нужную ширину */
+
 }
